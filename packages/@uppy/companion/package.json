@@ -29,6 +29,7 @@
     "companion": "./bin/companion"
   },
   "dependencies": {
+    "@huydd/fs-tail-stream": "^1.1.0",
     "@purest/providers": "1.0.0",
     "@uppy/fs-tail-stream": "1.2.0",
     "atob": "2.1.0",

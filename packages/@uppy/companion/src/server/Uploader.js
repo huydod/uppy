@@ -2,7 +2,7 @@ const fs = require('fs')
 const path = require('path')
 const tus = require('tus-js-client')
 const uuid = require('uuid')
-const createTailReadStream = require('@uppy/fs-tail-stream')
+const createTailReadStream = require('@huydd/fs-tail-stream')
 const emitter = require('./emitter')
 const request = require('request')
 const serializeError = require('serialize-error')
@@ -479,7 +479,7 @@ class Uploader {
     })
 
     this.writeStream.on('finish', () => {
-      file.close()
+      file.on('eof', file.close)
     })
 
     return this._uploadS3(file)
@@ -494,7 +494,7 @@ class Uploader {
       return
     }
 
-    const filename = this.options.metadata.filename || path.basename(this.path)
+    const filename = this.options.metadata.name || path.basename(this.path)
     const { client, options } = this.options.s3
 
     const upload = client.upload({
